@@ -1,4 +1,4 @@
-name: 'Sandbox Action'
+name: 'sandbox-launch-action'
 description: 'Action used to generate Crafting Sandbox autolaunch URL'
 author: 'Crafting Inc.'
 inputs:
