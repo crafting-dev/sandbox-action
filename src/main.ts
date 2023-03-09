@@ -9,6 +9,7 @@ async function run(): Promise<void> {
     const sandboxParams = parseParams()
     const baseUrl = core.getInput('baseUrl')
     const url = await generateSandboxLaunchUrl(baseUrl, sandboxParams)
+    core.info(`Preview: ${url}`)
     await postComment(url)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)

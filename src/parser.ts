@@ -14,6 +14,7 @@ export function parseParams(): SandboxParams {
   }
   const name = core.getInput('name')
   const paramsFile = core.getInput('launch')
+  core.debug(`parsing the parameter file: ${paramsFile}`)
   let yamlString = fs.readFileSync(paramsFile).toString()
   core.debug(`configuration: ${yamlString}`)
   yamlString = yamlString.replace('$BRANCH', process.env.GITHUB_HEAD_REF || '')
