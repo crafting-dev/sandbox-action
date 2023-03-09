@@ -25,12 +25,12 @@ The launch file is a YAML file of sandbox launch parameters which is described i
 ```yaml
 # template name
 template: "template-name"
-# whether to auto launch the sandbox
+# A flag indicate the target sandbox will be automatically launched.
 autoLaunch: true,
 # an array of workspaces parameters
 workspaces:
   - name: workspace
-    # auto follow the latest change for this workspace
+    # A flag indicates whether to keep track of updates in the upstream Git repository.
     auto: false
     # an array of checkouts under this workspace
     checkouts:
