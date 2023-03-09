@@ -1,6 +1,6 @@
 # sandbox-launch-action
 
-`sandbox-launch-action` enables an easier way to construct Crafting Sandbox Preview url. 
+`sandbox-launch-action` enables an easier way to construct Crafting Sandbox Preview URL.  
 
 ## Usage
 
