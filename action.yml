@@ -1,0 +1,21 @@
+name: 'Sandbox Action'
+description: 'Action used to generate Crafting Sandbox autolaunch URL'
+author: 'Crafting Inc.'
+inputs:
+  baseUrl:
+    required: true
+    description: 'the base url of the sandbox'
+    default: 'https://sandboxes.cloud'
+  name:
+    required: true
+    description: 'name of the auto launch sandbox'
+  launch:
+    required: true
+    description: 'the launch json file contains'
+    default: './.sandbox/launch.yaml'
+outputs:
+  url:
+    description: 'generated sandbox auto launch URL'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
