@@ -99,6 +99,7 @@ function run() {
             const sandboxParams = (0, parser_1.parseParams)();
             const baseUrl = core.getInput('baseUrl');
             const url = yield (0, generators_1.generateSandboxLaunchUrl)(baseUrl, sandboxParams);
+            core.info(`Preview: ${url}`);
             yield (0, post_comment_1.postComment)(url);
         }
         catch (error) {
@@ -152,6 +153,7 @@ function parseParams() {
     };
     const name = core.getInput('name');
     const paramsFile = core.getInput('launch');
+    core.debug(`parsing the parameter file: ${paramsFile}`);
     let yamlString = fs.readFileSync(paramsFile).toString();
     core.debug(`configuration: ${yamlString}`);
     yamlString = yamlString.replace('$BRANCH', process.env.GITHUB_HEAD_REF || '');
