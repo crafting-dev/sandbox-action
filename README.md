@@ -36,7 +36,7 @@ containers:
 
 ```
 
-$BRANCH is a built-in variable which is set to the current branch in the Github Action context. e.g. In a PR, it would be set to the PR's source branch.
+`$BRANCH` is a built-in variable which is set to the current branch in the Github Action context. e.g. In a PR, it would be set to the PR's source branch.
 
 ## Preview
 
