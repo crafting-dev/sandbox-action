@@ -29,6 +29,7 @@ function generateSandboxLaunchQueryParameters(params) {
     return __awaiter(this, void 0, void 0, function* () {
         const templateQueryParam = `template=${params.template}`;
         const nameQueryParam = `sandbox_name=${params.sandboxName}`;
+        const autoLaunchParam = `autolaunch=${params.autoLaunch}`;
         const containersQueryParams = params.containers.map(container => `container_${container.name}_snapshot=${container.snapshot}`);
         const dependenciesQueryParams = params.dependencies.map(dependency => `dep_${dependency.name}_snapshot=${dependency.snapshot}`);
         const checkoutsQueryParams = params.workspaces.flatMap(workspace => {
@@ -40,6 +41,7 @@ function generateSandboxLaunchQueryParameters(params) {
         const queryParams = [
             templateQueryParam,
             nameQueryParam,
+            autoLaunchParam,
             ...containersQueryParams,
             ...dependenciesQueryParams,
             ...checkoutsQueryParams,
