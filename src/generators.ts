@@ -14,6 +14,7 @@ export async function generateSandboxLaunchQueryParameters(
 ): Promise<string> {
   const templateQueryParam = `template=${params.template}`
   const nameQueryParam = `sandbox_name=${params.sandboxName}`
+  const autoLaunchParam = `autolaunch=${params.autoLaunch}`
 
   const containersQueryParams = params.containers.map(
     container => `container_${container.name}_snapshot=${container.snapshot}`
@@ -36,6 +37,7 @@ export async function generateSandboxLaunchQueryParameters(
   const queryParams = [
     templateQueryParam,
     nameQueryParam,
+    autoLaunchParam,
     ...containersQueryParams,
     ...dependenciesQueryParams,
     ...checkoutsQueryParams,
