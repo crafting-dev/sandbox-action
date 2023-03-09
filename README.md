@@ -1,12 +1,12 @@
-# sandbox-action
+# sandbox-launch-action
 
-`sandbox-action` enables an easier way to construct Crafting Sandbox Preview url. 
+`sandbox-launch-action` enables an easier way to construct Crafting Sandbox Preview url. 
 
 ## Usage
 
 ```yaml
 - name: Setup
-  uses: crafting-dev/sandbox-action/@version
+  uses: crafting-dev/sandbox-launch-action/@version
   with:
     name: custom-sandbox-name
     launch: './.sandbox/launch.yaml'
