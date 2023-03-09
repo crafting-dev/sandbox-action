@@ -1,8 +1,10 @@
 # sandbox-launch-action
 
-`sandbox-launch-action` enables an easier way to construct Crafting Sandbox Preview URL.  
+`sandbox-launch-action` enables an easier way to construct [Crafting Sandbox Preview URL](https://docs.sandboxes.cloud/docs/git-integration).  
 
 ## Usage
+
+### Installation
 
 ```yaml
 - name: Setup
@@ -14,9 +16,9 @@
 
 `custom-sandbox-name` should be replaced with the desired sandbox name. 
 
-By default, file `./.sandbox/launch.yaml` is used as the sandbox launch parameters. You can re-specify it by update the corresponding `launch` inputs. 
+By default, file `./.sandbox/launch.yaml` is used as the sandbox launch parameters. You can re-specify it by update the corresponding `launch` inputs. The launch file is a YAML file of sandbox launch parameters.  
 
-## Launch Parameter
+### Launch Parameters
 
 ```yaml
 template: "template-name"
@@ -33,9 +35,9 @@ dependencies:
 containers:
   - name: container
     snapshot: snapshot-name
-
 ```
 
+### Built-in variables
 `$BRANCH` is a built-in variable which is set to the current branch in the Github Action context. e.g. In a PR, it would be set to the PR's source branch.
 
 ## Preview
