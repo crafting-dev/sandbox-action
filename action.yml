@@ -9,13 +9,32 @@ inputs:
     required: true
     description: 'the base url of the sandbox'
     default: 'https://sandboxes.cloud'
+  template:
+    required: true
+    description: name of the template for target sandbox.
   name:
-    required: true
+    required: false
     description: 'name of the auto launch sandbox'
-  launch:
+  autoLaunch:
+    required: false
+    description: If true, sandbox is auto launched. Default to false.
+    default: false
+  checkouts:
     required: true
-    description: 'the launch json file contains'
-    default: './.sandbox/launch.yaml'
+    description: Comma-separated string workspace:path,...
+  autoFollow:
+    required: false
+    description: Comma-separated workspace. All these workspaces would be in auto mode
+  depSnapshots:
+    required: false
+    description: Comma-separated string name:snapshot,...
+  containerSnapshots:
+    required: false
+    description: Comma-separated string name:snapshot,...
+  extraQueries:
+    required: false
+    description: If the built-in inputs could not meet the requirement, raw query parameters could be provided
+
 outputs:
   url:
     description: 'generated sandbox auto launch URL'
