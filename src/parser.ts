@@ -1,27 +1,81 @@
 import * as core from '@actions/core'
-import * as fs from 'fs'
-import * as yaml from 'js-yaml'
-import {SandboxParams} from './types'
+import {
+  ContainerParams,
+  DependencyParams,
+  SandboxParams,
+  WorkspaceParams
+} from './types'
 
-export function parseParams(): SandboxParams {
+export const parseParams = (): SandboxParams => {
   const baseSandboxParams: SandboxParams = {
     template: '',
-    sandboxName: '',
+    name: '',
     workspaces: [],
     dependencies: [],
     containers: [],
     autoLaunch: false
   }
   const name = core.getInput('name')
-  const paramsFile = core.getInput('launch')
-  core.debug(`parsing the parameter file: ${paramsFile}`)
-  let yamlString = fs.readFileSync(paramsFile).toString()
-  core.debug(`configuration: ${yamlString}`)
-  yamlString = yamlString.replace('$BRANCH', process.env.GITHUB_HEAD_REF || '')
-  const config = yaml.load(yamlString) as Partial<SandboxParams>
+  const template = core.getInput('template')
+  const autoLaunch = core.getBooleanInput('autoLaunch')
+  const workspaces = parseCheckouts(core.getInput('checkouts'))
+  const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'))
+  const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
+
+  const repo = core.getInput('repo')
+  const versionSpec = currentBranch()
+
   return {
     ...baseSandboxParams,
-    ...config,
-    sandboxName: name
+    name,
+    template,
+    workspaces,
+    containers: containerSnapshots,
+    dependencies: dependencySnapshots,
+    autoLaunch,
+    repo,
+    versionSpec
   } as SandboxParams
+}
+
+const parseCheckouts = (params: string): WorkspaceParams[] => {
+  if (!params) {
+    return []
+  }
+
+  const autoFollow = core.getBooleanInput('autoFollow')
+
+  return params.split(',').map(p => {
+    const items = p.split(':')
+    return {
+      name: items[0],
+      auto: autoFollow,
+      checkouts: [
+        {
+          name: items[1],
+          version: currentBranch()
+        }
+      ]
+    }
+  })
+}
+
+const parseSnapshots = (
+  params: string
+): DependencyParams[] | ContainerParams[] => {
+  if (!params) {
+    return []
+  }
+
+  return params.split(',').map(p => {
+    const items = p.split(':')
+    return {
+      name: items[0],
+      snapshot: items[1]
+    }
+  })
+}
+
+const currentBranch = (): string => {
+  return process.env.GITHUB_HEAD_REF || ''
 }

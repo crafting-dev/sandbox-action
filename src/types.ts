@@ -21,9 +21,13 @@ export interface ContainerParams {
 
 export interface SandboxParams {
   template: string
-  sandboxName: string
+  name: string
+  autoLaunch: boolean
   workspaces: WorkspaceParams[]
   dependencies: DependencyParams[]
   containers: ContainerParams[]
-  autoLaunch: boolean
+
+  repo?: string
+  versionSpec?: string
+  extraQuery?: string
 }
