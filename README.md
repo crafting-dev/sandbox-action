@@ -26,7 +26,7 @@
 | checkouts          | required | string | Comma-separated: workspace:path,...                                                                                                                   |
 | name               | optional | string | `CUSTOM_SANDBOX_NAME` should be replaced with the desired sandbox name. If not specified, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used. |
 | autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to false.                                                                                                  |
-| autoFollow         | optional | bool   | Comma-separated: workspace. All these workspaces would be in auto mode                                                                                |
+| autoFollow         | optional | string | Comma-separated: workspace. All these workspaces would be in auto mode                                                                                |
 | depSnapshots       | optional | string | Comma-separated: name:snapshot,...                                                                                                                    |
 | containerSnapshots | optional | string | Comma-separated: name:snapshot,...                                                                                                                    |
 | extraQueries       | optional | string | If the built-in inputs could not meet the requirement, raw query parameters could be provided                                                         |
