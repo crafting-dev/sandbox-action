@@ -93,7 +93,7 @@ const sandboxName = (): string => {
   // repoName-pr-prNumber
   const limit = 20 - 4 - prNumber.length
   if (repoName.length >= limit) {
-    repoName = repoName.substring(0, repoName.length - limit)
+    repoName = repoName.substring(0, limit - 1)
   }
 
   return `${repoName}-pr-${prNumber}`
