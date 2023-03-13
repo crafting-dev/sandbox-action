@@ -150,13 +150,13 @@ const core = __importStar(__nccwpck_require__(2186));
 const parseParams = () => {
     const baseSandboxParams = {
         template: '',
-        name: defaultName(),
+        name: '',
         workspaces: [],
         dependencies: [],
         containers: [],
         autoLaunch: false
     };
-    const name = core.getInput('name');
+    const name = sandboxName();
     const template = core.getInput('template');
     const autoLaunch = core.getBooleanInput('autoLaunch');
     const workspaces = parseCheckouts(core.getInput('checkouts'));
@@ -202,7 +202,11 @@ const parseSnapshots = (params) => {
         };
     });
 };
-const defaultName = () => {
+const sandboxName = () => {
+    const name = core.getInput('name');
+    if (name) {
+        return name;
+    }
     const orgRepoName = process.env.GITHUB_REPOSITORY;
     const parts = (orgRepoName === null || orgRepoName === void 0 ? void 0 : orgRepoName.split('/')) || [];
     let repoName = '';

@@ -9,13 +9,13 @@ import {
 export const parseParams = (): SandboxParams => {
   const baseSandboxParams: SandboxParams = {
     template: '',
-    name: defaultName(),
+    name: '',
     workspaces: [],
     dependencies: [],
     containers: [],
     autoLaunch: false
   }
-  const name = core.getInput('name')
+  const name = sandboxName()
   const template = core.getInput('template')
   const autoLaunch = core.getBooleanInput('autoLaunch')
   const workspaces = parseCheckouts(core.getInput('checkouts'))
@@ -76,7 +76,12 @@ const parseSnapshots = (
   })
 }
 
-const defaultName = (): string => {
+const sandboxName = (): string => {
+  const name = core.getInput('name')
+  if (name) {
+    return name
+  }
+
   const orgRepoName = process.env.GITHUB_REPOSITORY
   const parts = orgRepoName?.split('/') || []
   let repoName = ''
