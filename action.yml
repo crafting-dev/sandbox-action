@@ -14,7 +14,7 @@ inputs:
     description: name of the template for target sandbox.
   name:
     required: false
-    description: 'name of the auto launch sandbox'
+    description: 'name of the auto launch sandbox. If not specified, a default name like <REPO>-pr-<PR-NUMBER> would be used.'
   autoLaunch:
     required: false
     description: If true, sandbox is auto launched. Default to false.
