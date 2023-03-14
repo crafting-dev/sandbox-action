@@ -25,7 +25,7 @@ export const parseParams = (): SandboxParams => {
   const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
   const envs = parseEnvironmentVariables(core.getInput('envVars'))
 
-  const repo = core.getInput('repo')
+  const repo = currentRepository()
   const versionSpec = currentBranch()
 
   return {
@@ -102,7 +102,7 @@ const sandboxName = (): string => {
     return name
   }
 
-  const orgRepoName = process.env.GITHUB_REPOSITORY
+  const orgRepoName = currentRepository()
   const parts = orgRepoName?.split('/') || []
   let repoName = ''
   if (parts.length === 2) {
@@ -118,6 +118,8 @@ const sandboxName = (): string => {
 
   return `${repoName}-pr-${prNumber}`
 }
+
+const currentRepository = (): string => process.env.GITHUB_REPOSITORY || ''
 
 const currentBranch = (): string => {
   return process.env.GITHUB_HEAD_REF || ''

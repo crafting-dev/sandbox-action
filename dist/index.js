@@ -166,7 +166,7 @@ const parseParams = () => {
     const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'));
     const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'));
     const envs = parseEnvironmentVariables(core.getInput('envVars'));
-    const repo = core.getInput('repo');
+    const repo = currentRepository();
     const versionSpec = currentBranch();
     return Object.assign(Object.assign({}, baseSandboxParams), { name,
         template,
@@ -225,7 +225,7 @@ const sandboxName = () => {
     if (name) {
         return name;
     }
-    const orgRepoName = process.env.GITHUB_REPOSITORY;
+    const orgRepoName = currentRepository();
     const parts = (orgRepoName === null || orgRepoName === void 0 ? void 0 : orgRepoName.split('/')) || [];
     let repoName = '';
     if (parts.length === 2) {
@@ -240,6 +240,7 @@ const sandboxName = () => {
     }
     return `${repoName}-pr-${prNumber}`;
 };
+const currentRepository = () => process.env.GITHUB_REPOSITORY || '';
 const currentBranch = () => {
     return process.env.GITHUB_HEAD_REF || '';
 };
