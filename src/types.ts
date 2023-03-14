@@ -19,6 +19,11 @@ export interface ContainerParams {
   snapshot: string
 }
 
+export interface EnvParams {
+  name: string
+  value: string
+}
+
 export interface SandboxParams {
   template: string
   name: string
@@ -26,6 +31,7 @@ export interface SandboxParams {
   workspaces: WorkspaceParams[]
   dependencies: DependencyParams[]
   containers: ContainerParams[]
+  envs: EnvParams[]
 
   repo?: string
   versionSpec?: string

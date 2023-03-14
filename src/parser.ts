@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import {
   ContainerParams,
   DependencyParams,
+  EnvParams,
   SandboxParams,
   WorkspaceParams
 } from './types'
@@ -13,6 +14,7 @@ export const parseParams = (): SandboxParams => {
     workspaces: [],
     dependencies: [],
     containers: [],
+    envs: [],
     autoLaunch: false
   }
   const name = sandboxName()
@@ -21,6 +23,7 @@ export const parseParams = (): SandboxParams => {
   const workspaces = parseCheckouts(core.getInput('checkouts'))
   const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'))
   const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
+  const envs = parseEnvironmentVariables(core.getInput('envVars'))
 
   const repo = core.getInput('repo')
   const versionSpec = currentBranch()
@@ -32,10 +35,27 @@ export const parseParams = (): SandboxParams => {
     workspaces,
     containers: containerSnapshots,
     dependencies: dependencySnapshots,
+    envs,
     autoLaunch,
     repo,
     versionSpec
   } as SandboxParams
+}
+
+const parseEnvironmentVariables = (params: string): EnvParams[] => {
+  const envs = params.split(',')
+  const envParams: EnvParams[] = []
+
+  for (const env of envs) {
+    if (process.env[env]) {
+      envParams.push({
+        name: env,
+        value: process.env[env] || ''
+      })
+    }
+  }
+
+  return envParams
 }
 
 const parseCheckouts = (params: string): WorkspaceParams[] => {

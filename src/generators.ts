@@ -34,14 +34,17 @@ export const generateSandboxLaunchQueryParameters = async (
     .filter(ws => ws.auto)
     .map(workspace => `ws_${workspace.name}_mode=auto`)
 
+  const envQueryParams = params.envs.map(env => `env_${env.name}=${env.value}`)
+
   let queryParams = [
     templateQueryParam,
     nameQueryParam,
     autoLaunchParam,
+    ...checkoutsQueryParams,
+    ...workspaceModesQueryParams,
     ...containersQueryParams,
     ...dependenciesQueryParams,
-    ...checkoutsQueryParams,
-    ...workspaceModesQueryParams
+    ...envQueryParams
   ].join('&')
 
   if (params.extraQuery) {

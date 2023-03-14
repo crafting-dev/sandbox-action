@@ -35,14 +35,16 @@ const generateSandboxLaunchQueryParameters = (params) => __awaiter(void 0, void 
     const workspaceModesQueryParams = params.workspaces
         .filter(ws => ws.auto)
         .map(workspace => `ws_${workspace.name}_mode=auto`);
+    const envQueryParams = params.envs.map(env => `env_${env.name}=${env.value}`);
     let queryParams = [
         templateQueryParam,
         nameQueryParam,
         autoLaunchParam,
+        ...checkoutsQueryParams,
+        ...workspaceModesQueryParams,
         ...containersQueryParams,
         ...dependenciesQueryParams,
-        ...checkoutsQueryParams,
-        ...workspaceModesQueryParams
+        ...envQueryParams
     ].join('&');
     if (params.extraQuery) {
         queryParams = `${queryParams}&${params.extraQuery}`;
@@ -154,6 +156,7 @@ const parseParams = () => {
         workspaces: [],
         dependencies: [],
         containers: [],
+        envs: [],
         autoLaunch: false
     };
     const name = sandboxName();
@@ -162,15 +165,30 @@ const parseParams = () => {
     const workspaces = parseCheckouts(core.getInput('checkouts'));
     const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'));
     const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'));
+    const envs = parseEnvironmentVariables(core.getInput('envVars'));
     const repo = core.getInput('repo');
     const versionSpec = currentBranch();
     return Object.assign(Object.assign({}, baseSandboxParams), { name,
         template,
-        workspaces, containers: containerSnapshots, dependencies: dependencySnapshots, autoLaunch,
+        workspaces, containers: containerSnapshots, dependencies: dependencySnapshots, envs,
+        autoLaunch,
         repo,
         versionSpec });
 };
 exports.parseParams = parseParams;
+const parseEnvironmentVariables = (params) => {
+    const envs = params.split(',');
+    const envParams = [];
+    for (const env of envs) {
+        if (process.env[env]) {
+            envParams.push({
+                name: env,
+                value: process.env[env] || ''
+            });
+        }
+    }
+    return envParams;
+};
 const parseCheckouts = (params) => {
     if (!params) {
         return [];
