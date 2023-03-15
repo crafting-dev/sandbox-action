@@ -8,8 +8,8 @@ This action is designed to work together with a Github [PullRequest](https://doc
 
 If a Github workflow was not configured with your repository, you can follow this [guide](https://docs.github.com/en/actions/quickstart#creating-your-first-workflow) or the below steps to issue a simple one:
 
-1. create a file .github/workflows/pullrequest.yaml
-2. fill the file with the below content:
+1. Create a file .github/workflows/pullrequest.yaml
+2. Fill the file with the below content:
 
 ```yaml
 name: PullRequest
@@ -40,7 +40,7 @@ jobs:
 - replace `VERSION` with the latest or desired version, such as v0.3.2.
 - env `GITHUB_TOKEN` must be provided, as the action depends on it to append a comment.
 
-3. create a PR and a preview URL would be appended to your PR:
+3. Create a PR and a preview URL would be appended to your PR:
 
 ![image](https://user-images.githubusercontent.com/501218/223888109-d9ac3567-4d33-44a5-98d9-d4599cb24ac3.png)
 
