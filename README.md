@@ -35,10 +35,12 @@ jobs:
 ```
 
 - replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
-- ensure the `GITHUB_TOKEN` env is properly set, as the action depends on it to append a comment.
+- env `GITHUB_TOKEN` must be provided, as the action depends on it to append a comment.
 
 
-3. create a PR and a preview URL would be appended to your PR.
+3. create a PR and a preview URL would be appended to your PR:
+
+![image](https://user-images.githubusercontent.com/501218/223888109-d9ac3567-4d33-44a5-98d9-d4599cb24ac3.png)
 
 ## Advanced Usage
 
@@ -90,6 +92,4 @@ Refer to [examples folder](examples/) for more details.
 
 ## Preview
 
-For more information about preview, please refer to this [guide](https://docs.sandboxes.cloud/docs/git-integration). Given the action is configured properly and a PR is made, a comment would be automatically appended to the PR and referencingthe preview URL.
-
-![image](https://user-images.githubusercontent.com/501218/223888109-d9ac3567-4d33-44a5-98d9-d4599cb24ac3.png)
+For more information about preview, please refer to this [guide](https://docs.sandboxes.cloud/docs/git-integration). 
