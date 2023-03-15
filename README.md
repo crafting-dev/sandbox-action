@@ -62,10 +62,6 @@ jobs:
     mode: auto
     # optinoal, comma separated string, a list of Github Action related environment variables that would be passed in as sandbox env.
     envVars: GITHUB_ACTION,GITHUB_REF...
-    # opitonal, comma separated string, a list of workspace:checkout_path to be explictly specified.
-    checkouts: workspace:path,workspace2:path2...
-    # optional, comma separated string, a list of workspaces of which the mode are set to auto. Each entry is of format workspace-name:checkout-path. This is used together with checkouts.
-    autoFollow: workspace,workspace2,...
     # optional, comma separated string, a list of snapshots customization for dependencies. Each entry is of format dependency-name:snapshot-name.
     depSnapshots: dep1:snapshot,dep2:snapshot...
     # optional, comma separated string, a list of snapshots customization for containers. Each entry is of format container-name:snapshot-name.
@@ -79,7 +75,6 @@ The full references of all inputs are listed in the below table:
 | Inputs             | Remark   | type   | Description                                                                                                                                                                                                                  |
 | ------------------ | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | template           | required | string | name of the template for target sandbox.                                                                                                                                                                                     |
-| checkouts          | optional | string | Comma-separated: workspace:path,.... This is an optional if there are multiple workspaces to be customized.                                                                                                                  |
 | name               | optional | string | `CUSTOM_SANDBOX_NAME` should be replaced with the desired sandbox name. If not specified, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.                                                                        |
 | autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to true.                                                                                                                                                                          |
 | mode               | optional | string | Workspace auto follow mode.                                                                                                                                                                                                  |
