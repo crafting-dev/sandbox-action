@@ -11,9 +11,6 @@ If a Github workflow was not configured with your repository, you can follow thi
 1. create a file .github/workflows/pullrequest.yaml
 2. fill the file with the below content:
 
-- replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
-- ensure the GITHUB_TOKEN env is properly set, as the action depends on it to append a comment.
-
 ```yaml
 name: PullRequest
 
@@ -30,12 +27,16 @@ jobs:
       # This is required to post a comment to PR.
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: generate-preview-url # name of this step
+      - name: generate-preview-url # name of this step, you can rename this as needed
         uses: crafting-dev/sandbox-launch-action/@latest
         with:
           # required inputs for sandbox-launch-action to specify the target template.
           template: TEMPLATE_NAME
 ```
+
+- replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
+- ensure the `GITHUB_TOKEN` env is properly set, as the action depends on it to append a comment.
+
 
 3. create a PR and a preview URL would be appended to your PR.
 
@@ -47,23 +48,36 @@ jobs:
 - name: generate-preview-url
   uses: crafting-dev/sandbox-launch-action/@version # version should replaced with the actual one
   with:
-    name: CUSTOM_SANDBOX_NAME
+    # required string.
     template: TEMPLATE_NAME
+    # optional string, name of desired sandbox. If not provided, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.
+    name: CUSTOM_SANDBOX_NAME
+    # optional boolean, default to true. The created sandbox url would launch the sandbox automatically.
     autoLaunch: true
+    # optional string, default to auto.  
+    mode: auto
+    # optinoal, comma separated string, a list of Github Action related environment variables that would be passed in as sandbox env.
     envVars: GITHUB_ACTION,GITHUB_REF...
+    # opitonal, comma separated string, a list of workspace:checkout_path to be explictly specified. 
     checkouts: workspace:path,workspace2:path2...
+    # optional, comma separated string, a list of workspaces of which the mode are set to auto. Each entry is of format workspace-name:checkout-path.
     autoFollow: workspace,workspace2,...
+    # optional, comma separated string, a list of snapshots customization for dependencies. Each entry is of format dependency-name:snapshot-name.
     depSnapshots: dep1:snapshot,dep2:snapshot...
+    # optional, comma separated string, a list of snapshots customization for containers. Each entry is of format container-name:snapshot-name.
     containerSnapshots: c1:snapshot,c2:snapshot...
+    # optional, raw query parameters for sandbox auto launch. 
     extraQuery: ...
 ```
+
+The full references of all inputs are listed in the below table:
 
 | Inputs             | Remark   | type   | Description                                                                                                                                                                                                                  |
 | ------------------ | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | template           | required | string | name of the template for target sandbox.                                                                                                                                                                                     |
 | checkouts          | optional | string | Comma-separated: workspace:path,.... This is an optional if there are multiple workspaces to be customized.                                                                                                                  |
 | name               | optional | string | `CUSTOM_SANDBOX_NAME` should be replaced with the desired sandbox name. If not specified, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.                                                                        |
-| autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to false.                                                                                                                                                                         |
+| autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to true.                                                                                                                                                                         |
 | autoFollow         | optional | string | Comma-separated: workspace. All these workspaces would be in auto mode                                                                                                                                                       |
 | depSnapshots       | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
 | containerSnapshots | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
