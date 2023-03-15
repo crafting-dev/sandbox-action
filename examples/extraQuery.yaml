@@ -1,0 +1,6 @@
+- name: sandbox-launch-action
+  uses: crafting-dev/sandbox-launch-action/@latest
+  with:
+    template: template-name
+    # raw query defined in https://docs.sandboxes.cloud/docs/git-integration#launch-a-sandbox-from-url-posted-to-pull-request
+    extraQuery: autolaunch=true&sandbox_name=sandbox-pr-1

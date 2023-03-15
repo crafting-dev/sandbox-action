@@ -1,0 +1,5 @@
+- name: sandbox-launch-action
+  uses: crafting-dev/sandbox-launch-action/@latest
+  with:
+    template: template-name
+    autoLaunch: true
