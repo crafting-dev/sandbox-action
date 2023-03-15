@@ -18,7 +18,11 @@ inputs:
   autoLaunch:
     required: false
     description: If true, sandbox is auto launched. Default to false.
-    default: false
+    default: true
+  mode:
+    required: false
+    description: Whether to follow the PR branch and automatically update the workspace(s).
+    default: auto
   checkouts:
     required: true
     description: Comma-separated string workspace:path,...
@@ -31,6 +35,9 @@ inputs:
   containerSnapshots:
     required: false
     description: Comma-separated string name:snapshot,...
+  envVars:
+    required: false
+    description: Common-separated Github Action environment variable names.
   extraQueries:
     required: false
     description: If the built-in inputs could not meet the requirement, raw query parameters could be provided
