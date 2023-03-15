@@ -69,6 +69,8 @@ jobs:
 
 ## Examples
 
+Refer to [examples folder](examples/) for more details.
+
 ## Preview
 
 For more information about preview, please refer to this [guide](https://docs.sandboxes.cloud/docs/git-integration). Given the action is configured properly and a PR is made, a comment would be automatically appended to the PR and referencingthe preview URL.
