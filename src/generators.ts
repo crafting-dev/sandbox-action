@@ -59,6 +59,10 @@ export const generateSandboxLaunchQueryParameters = async (
     queryParams = `${queryParams}&version_spec=${params.versionSpec}`
   }
 
+  if (params.mode) {
+    queryParams = `${queryParams}&mode=${params.mode}`
+  }
+
   return new Promise(resolve => {
     resolve(queryParams)
   })

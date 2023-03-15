@@ -18,25 +18,27 @@ on:
   pull_request:
     # this action will be triggered each time a PR was made against branch master.
     branches: [master]
+    # this workflow will only be triggered when a PR is created. Following pushes do not trigger this workflow again.
+    types: [opened]
 
 jobs:
   build:
     name: Test
-    runs-on: [self-hosted, linux, x64, shared]
+    runs-on: [ubuntu-latest]
     env:
       # This is required to post a comment to PR.
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: generate-preview-url # name of this step, you can rename this as needed
-        uses: crafting-dev/sandbox-launch-action/@latest
+        uses: crafting-dev/sandbox-launch-action/@VERSION
         with:
           # required inputs for sandbox-launch-action to specify the target template.
           template: TEMPLATE_NAME
 ```
 
 - replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
+- replace `VERSION` with the latest or desired version, such as v0.3.2.
 - env `GITHUB_TOKEN` must be provided, as the action depends on it to append a comment.
-
 
 3. create a PR and a preview URL would be appended to your PR:
 
@@ -56,11 +58,11 @@ jobs:
     name: CUSTOM_SANDBOX_NAME
     # optional boolean, default to true. The created sandbox url would launch the sandbox automatically.
     autoLaunch: true
-    # optional string, default to auto.  
+    # optional string, default to auto.
     mode: auto
     # optinoal, comma separated string, a list of Github Action related environment variables that would be passed in as sandbox env.
     envVars: GITHUB_ACTION,GITHUB_REF...
-    # opitonal, comma separated string, a list of workspace:checkout_path to be explictly specified. 
+    # opitonal, comma separated string, a list of workspace:checkout_path to be explictly specified.
     checkouts: workspace:path,workspace2:path2...
     # optional, comma separated string, a list of workspaces of which the mode are set to auto. Each entry is of format workspace-name:checkout-path.
     autoFollow: workspace,workspace2,...
@@ -68,7 +70,7 @@ jobs:
     depSnapshots: dep1:snapshot,dep2:snapshot...
     # optional, comma separated string, a list of snapshots customization for containers. Each entry is of format container-name:snapshot-name.
     containerSnapshots: c1:snapshot,c2:snapshot...
-    # optional, raw query parameters for sandbox auto launch. 
+    # optional, raw query parameters for sandbox auto launch.
     extraQuery: ...
 ```
 
@@ -79,7 +81,7 @@ The full references of all inputs are listed in the below table:
 | template           | required | string | name of the template for target sandbox.                                                                                                                                                                                     |
 | checkouts          | optional | string | Comma-separated: workspace:path,.... This is an optional if there are multiple workspaces to be customized.                                                                                                                  |
 | name               | optional | string | `CUSTOM_SANDBOX_NAME` should be replaced with the desired sandbox name. If not specified, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.                                                                        |
-| autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to true.                                                                                                                                                                         |
+| autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to true.                                                                                                                                                                          |
 | autoFollow         | optional | string | Comma-separated: workspace. All these workspaces would be in auto mode                                                                                                                                                       |
 | depSnapshots       | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
 | containerSnapshots | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
@@ -92,4 +94,4 @@ Refer to [examples folder](examples/) for more details.
 
 ## Preview
 
-For more information about preview, please refer to this [guide](https://docs.sandboxes.cloud/docs/git-integration). 
+For more information about preview, please refer to this [guide](https://docs.sandboxes.cloud/docs/git-integration).

@@ -55,6 +55,9 @@ const generateSandboxLaunchQueryParameters = (params) => __awaiter(void 0, void 
     if (params.versionSpec) {
         queryParams = `${queryParams}&version_spec=${params.versionSpec}`;
     }
+    if (params.mode) {
+        queryParams = `${queryParams}&mode=${params.mode}`;
+    }
     return new Promise(resolve => {
         resolve(queryParams);
     });
@@ -157,7 +160,8 @@ const parseParams = () => {
         dependencies: [],
         containers: [],
         envs: [],
-        autoLaunch: false
+        autoLaunch: true,
+        mode: 'auto'
     };
     const name = sandboxName();
     const template = core.getInput('template');
@@ -166,6 +170,7 @@ const parseParams = () => {
     const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'));
     const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'));
     const envs = parseEnvironmentVariables(core.getInput('envVars'));
+    const mode = core.getInput('mode');
     const repo = currentRepository();
     const versionSpec = currentBranch();
     return Object.assign(Object.assign({}, baseSandboxParams), { name,
@@ -173,6 +178,7 @@ const parseParams = () => {
         workspaces, containers: containerSnapshots, dependencies: dependencySnapshots, envs,
         autoLaunch,
         repo,
+        mode,
         versionSpec });
 };
 exports.parseParams = parseParams;

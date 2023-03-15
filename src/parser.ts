@@ -15,7 +15,8 @@ export const parseParams = (): SandboxParams => {
     dependencies: [],
     containers: [],
     envs: [],
-    autoLaunch: false
+    autoLaunch: true,
+    mode: 'auto'
   }
   const name = sandboxName()
   const template = core.getInput('template')
@@ -24,6 +25,7 @@ export const parseParams = (): SandboxParams => {
   const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'))
   const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
   const envs = parseEnvironmentVariables(core.getInput('envVars'))
+  const mode = core.getInput('mode')
 
   const repo = currentRepository()
   const versionSpec = currentBranch()
@@ -38,6 +40,7 @@ export const parseParams = (): SandboxParams => {
     envs,
     autoLaunch,
     repo,
+    mode,
     versionSpec
   } as SandboxParams
 }

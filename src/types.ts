@@ -34,6 +34,7 @@ export interface SandboxParams {
   envs: EnvParams[]
 
   repo?: string
+  mode?: string
   versionSpec?: string
   extraQuery?: string
 }
