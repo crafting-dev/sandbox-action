@@ -12,7 +12,6 @@ If a Github workflow was not configured with your repository, you can follow thi
 2. fill the file with the below content:
 
 - replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
-- `VERSION` must be replaced with a valid version listed in this [page](https://github.com/marketplace/actions/sandbox-launch-action).
 
 ```yaml
 name: PullRequest
