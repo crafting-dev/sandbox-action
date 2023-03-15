@@ -108,6 +108,8 @@ const sandboxName = (): string => {
   if (parts.length === 2) {
     repoName = parts[1]
   }
+  repoName = repoName.replace('-', '')
+
   const prNumber = githubPrNumber()
   // trim repo name to ensure the full name is less than 20 characters
   // repoName-pr-prNumber

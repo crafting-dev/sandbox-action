@@ -12,6 +12,7 @@ If a Github workflow was not configured with your repository, you can follow thi
 2. fill the file with the below content:
 
 - replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
+- ensure the GITHUB_TOKEN env is properly set, as the action depends on it to append a comment.
 
 ```yaml
 name: PullRequest
@@ -25,6 +26,9 @@ jobs:
   build:
     name: Test
     runs-on: [self-hosted, linux, x64, shared]
+    env:
+      # This is required to post a comment to PR.
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: generate-preview-url # name of this step
         uses: crafting-dev/sandbox-launch-action/@latest
