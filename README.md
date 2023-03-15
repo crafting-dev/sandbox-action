@@ -64,7 +64,7 @@ jobs:
     envVars: GITHUB_ACTION,GITHUB_REF...
     # opitonal, comma separated string, a list of workspace:checkout_path to be explictly specified.
     checkouts: workspace:path,workspace2:path2...
-    # optional, comma separated string, a list of workspaces of which the mode are set to auto. Each entry is of format workspace-name:checkout-path.
+    # optional, comma separated string, a list of workspaces of which the mode are set to auto. Each entry is of format workspace-name:checkout-path. This is used together with checkouts.
     autoFollow: workspace,workspace2,...
     # optional, comma separated string, a list of snapshots customization for dependencies. Each entry is of format dependency-name:snapshot-name.
     depSnapshots: dep1:snapshot,dep2:snapshot...
@@ -82,7 +82,7 @@ The full references of all inputs are listed in the below table:
 | checkouts          | optional | string | Comma-separated: workspace:path,.... This is an optional if there are multiple workspaces to be customized.                                                                                                                  |
 | name               | optional | string | `CUSTOM_SANDBOX_NAME` should be replaced with the desired sandbox name. If not specified, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.                                                                        |
 | autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to true.                                                                                                                                                                          |
-| autoFollow         | optional | string | Comma-separated: workspace. All these workspaces would be in auto mode                                                                                                                                                       |
+| mode               | optional | string | Workspace auto follow mode.                                                                                                                                                                                                  |
 | depSnapshots       | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
 | containerSnapshots | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
 | envVars            | optional | string | Common-separated strings for [Github Action environment variables](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables). The included ones are passed to sandbox auto launch url |
