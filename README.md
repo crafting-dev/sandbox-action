@@ -82,6 +82,7 @@ The full references of all inputs are listed in the below table:
 | containerSnapshots | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
 | envVars            | optional | string | Common-separated strings for [Github Action environment variables](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables). The included ones are passed to sandbox auto launch url |
 | extraQueries       | optional | string | If the built-in inputs could not meet the requirement, raw query parameters could be provided                                                                                                                                |
+| message            | optional | string | The message template to be used in the Github comment. Default is Crafting Sandbox [Preview]($URL). $URL is a built-in variable which would be replaced by the generated auto launch URL.                                    |
 
 ## Examples
 
