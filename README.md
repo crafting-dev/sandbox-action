@@ -23,21 +23,21 @@ on:
 
 jobs:
   build:
-    name: Test
+    # name of the job, you can rename this as needed
+    name: Crafting Preview Link
     runs-on: [ubuntu-latest]
     env:
-      # This is required to post a comment to PR.
+      # This tells the action to use the token so that it can post a comment to PR.
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: generate-preview-url # name of this step, you can rename this as needed
-        uses: crafting-dev/sandbox-launch-action/@VERSION
+        uses: crafting-dev/sandbox-launch-action@0.4.1 # update the version as needed
         with:
           # required inputs for sandbox-launch-action to specify the target template.
           template: TEMPLATE_NAME
 ```
 
-- replace `TEMPLATE_NAME` with the target template defined sandboxes.cloud.
-- replace `VERSION` with the latest or desired version, such as v0.3.2.
+- replace `TEMPLATE_NAME` with the target template defined in Crafting (https://sandboxes.cloud).
 - env `GITHUB_TOKEN` must be provided, as the action depends on it to append a comment.
 
 3. Create a PR and a preview URL would be appended to your PR:
@@ -50,7 +50,7 @@ jobs:
 
 ```yaml
 - name: generate-preview-url
-  uses: crafting-dev/sandbox-launch-action/@version # version should replaced with the actual one
+  uses: crafting-dev/sandbox-launch-action@version # version should replaced with the actual one
   with:
     # required string.
     template: TEMPLATE_NAME
