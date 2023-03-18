@@ -3,7 +3,10 @@ import * as github from '@actions/github'
 
 const GITHUB_API_VERSION = '2022-11-28'
 
-export async function postComment(url: string): Promise<void> {
+export async function postComment(
+  template: string,
+  url: string
+): Promise<void> {
   const octokit = github.getOctokit(process.env.GITHUB_TOKEN || '')
   const {owner, repo} = github.context.repo
   const number = github.context.payload.pull_request?.number
@@ -17,7 +20,7 @@ export async function postComment(url: string): Promise<void> {
         owner,
         repo,
         issue_number: number,
-        body: `Crafting Sandbox [Preview](${url})`,
+        body: template.replace('$URL', url),
         headers: {
           'X-GitHub-Api-Version': GITHUB_API_VERSION
         }

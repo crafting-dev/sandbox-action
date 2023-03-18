@@ -16,7 +16,8 @@ export const parseParams = (): SandboxParams => {
     containers: [],
     envs: [],
     autoLaunch: true,
-    mode: 'auto'
+    mode: 'auto',
+    message: ''
   }
   const name = sandboxName()
   const template = core.getInput('template')
@@ -26,6 +27,7 @@ export const parseParams = (): SandboxParams => {
   const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
   const envs = parseEnvironmentVariables(core.getInput('envVars'))
   const mode = core.getInput('mode')
+  const message = core.getInput('message')
 
   const repo = currentRepository()
   const versionSpec = currentBranch()
@@ -41,7 +43,8 @@ export const parseParams = (): SandboxParams => {
     autoLaunch,
     repo,
     mode,
-    versionSpec
+    versionSpec,
+    message: message ?? 'Crafting Sandbox [Preview]($URL)'
   } as SandboxParams
 }
 

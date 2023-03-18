@@ -32,6 +32,7 @@ export interface SandboxParams {
   dependencies: DependencyParams[]
   containers: ContainerParams[]
   envs: EnvParams[]
+  message: string
 
   repo?: string
   mode?: string

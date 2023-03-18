@@ -112,7 +112,7 @@ function run() {
             const baseUrl = core.getInput('baseUrl');
             const url = yield (0, generators_1.generateSandboxLaunchUrl)(baseUrl, sandboxParams);
             core.info(`Preview: ${url}`);
-            yield (0, post_comment_1.postComment)(url);
+            yield (0, post_comment_1.postComment)(sandboxParams.message, url);
         }
         catch (error) {
             if (error instanceof Error)
@@ -161,7 +161,8 @@ const parseParams = () => {
         containers: [],
         envs: [],
         autoLaunch: true,
-        mode: 'auto'
+        mode: 'auto',
+        message: ''
     };
     const name = sandboxName();
     const template = core.getInput('template');
@@ -171,6 +172,7 @@ const parseParams = () => {
     const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'));
     const envs = parseEnvironmentVariables(core.getInput('envVars'));
     const mode = core.getInput('mode');
+    const message = core.getInput('message');
     const repo = currentRepository();
     const versionSpec = currentBranch();
     return Object.assign(Object.assign({}, baseSandboxParams), { name,
@@ -179,7 +181,7 @@ const parseParams = () => {
         autoLaunch,
         repo,
         mode,
-        versionSpec });
+        versionSpec, message: message !== null && message !== void 0 ? message : 'Crafting Sandbox [Preview]($URL)' });
 };
 exports.parseParams = parseParams;
 const parseEnvironmentVariables = (params) => {
@@ -313,7 +315,7 @@ exports.postComment = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const GITHUB_API_VERSION = '2022-11-28';
-function postComment(url) {
+function postComment(template, url) {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
         const octokit = github.getOctokit(process.env.GITHUB_TOKEN || '');
@@ -327,7 +329,7 @@ function postComment(url) {
                 owner,
                 repo,
                 issue_number: number,
-                body: `Crafting Sandbox [Preview](${url})`,
+                body: template.replace('$URL', url),
                 headers: {
                     'X-GitHub-Api-Version': GITHUB_API_VERSION
                 }
