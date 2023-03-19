@@ -44,7 +44,7 @@ export const parseParams = (): SandboxParams => {
     repo,
     mode,
     versionSpec,
-    message: message ?? 'Crafting Sandbox [Preview]($URL)'
+    message: message || 'Crafting Sandbox [Preview]($URL)'
   } as SandboxParams
 }
 

@@ -181,7 +181,7 @@ const parseParams = () => {
         autoLaunch,
         repo,
         mode,
-        versionSpec, message: message !== null && message !== void 0 ? message : 'Crafting Sandbox [Preview]($URL)' });
+        versionSpec, message: message || 'Crafting Sandbox [Preview]($URL)' });
 };
 exports.parseParams = parseParams;
 const parseEnvironmentVariables = (params) => {
