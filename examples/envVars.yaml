@@ -1,5 +1,5 @@
 - name: generate-preview-url
-  uses: crafting-dev/sandbox-launch-action/@latest
+  uses: crafting-dev/sandbox-launch-action/@VERSION
   with:
     template: template-name
     # for a full list of Github action variables, refer to https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables

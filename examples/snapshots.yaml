@@ -2,7 +2,7 @@
 # By default, these two workloads do not have any snapshot specified
 # If we'd like to customize, the below step could be used.
 - name: generate-preview-url
-  uses: crafting-dev/sandbox-launch-action/@version # version should replaced with the actual one
+  uses: crafting-dev/sandbox-launch-action/@VERSION # version should replaced with the actual one
   with:
     template: template-name
     depSnapshots: mysql:mysql-snapshot-name
