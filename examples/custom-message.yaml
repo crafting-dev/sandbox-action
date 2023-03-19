@@ -1,0 +1,7 @@
+- name: sandbox-launch-action
+  uses: crafting-dev/sandbox-launch-action/@latest
+  with:
+    template: template-name
+    autoLaunch: true
+    # $URL will be replaced by the auto launch URL.
+    message: Preview your PR in [Crafting Sandbox]($URL)
