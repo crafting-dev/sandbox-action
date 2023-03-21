@@ -56,8 +56,8 @@ jobs:
     template: TEMPLATE_NAME
     # optional string, name of desired sandbox. If not provided, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.
     name: CUSTOM_SANDBOX_NAME
-    # optional boolean, default to true. The created sandbox url would launch the sandbox automatically.
-    autoLaunch: true
+    # optional boolean, default to false. The created sandbox url require user to manually launch the sandbox.
+    manual: false
     # optional string, default to auto.
     mode: auto
     # optinoal, comma separated string, a list of Github Action related environment variables that would be passed in as sandbox env.
@@ -76,7 +76,7 @@ The full references of all inputs are listed in the below table:
 | ------------------ | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | template           | required | string | name of the template for target sandbox.                                                                                                                                                                                     |
 | name               | optional | string | `CUSTOM_SANDBOX_NAME` should be replaced with the desired sandbox name. If not specified, a default name like ` <REPO>-pr-<PR-NUMBER>` would be used.                                                                        |
-| autoLaunch         | optional | bool   | If true, sandbox is auto launched. Default to true.                                                                                                                                                                          |
+| manual         | optional | bool   | If true, sandbox is not auto launched. Default to false.                                                                                                                                                                          |
 | mode               | optional | string | Workspace auto follow mode.                                                                                                                                                                                                  |
 | depSnapshots       | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |
 | containerSnapshots | optional | string | Comma-separated: name:snapshot,...                                                                                                                                                                                           |

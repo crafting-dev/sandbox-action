@@ -20,8 +20,10 @@ export const parseParams = (): SandboxParams => {
     message: ''
   }
   const name = sandboxName()
-  const template = core.getInput('template')
-  const autoLaunch = core.getBooleanInput('autoLaunch')
+  const template = core.getInput('template', {
+    required: true
+  })
+  const manualLaunch = core.getBooleanInput('manualLaunch')
   const workspaces = parseCheckouts(core.getInput('checkouts'))
   const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'))
   const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
@@ -40,11 +42,11 @@ export const parseParams = (): SandboxParams => {
     containers: containerSnapshots,
     dependencies: dependencySnapshots,
     envs,
-    autoLaunch,
+    autoLaunch: !manualLaunch,
     repo,
     mode,
     versionSpec,
-    message: message || 'Crafting Sandbox [Preview]($URL)'
+    message: message || 'Crafting Sandbox [Preview]($URL){:target="_blank"}'
   } as SandboxParams
 }
 

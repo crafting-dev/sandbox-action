@@ -165,8 +165,10 @@ const parseParams = () => {
         message: ''
     };
     const name = sandboxName();
-    const template = core.getInput('template');
-    const autoLaunch = core.getBooleanInput('autoLaunch');
+    const template = core.getInput('template', {
+        required: true,
+    });
+    const manualLaunch = core.getBooleanInput('manualLaunch');
     const workspaces = parseCheckouts(core.getInput('checkouts'));
     const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'));
     const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'));
@@ -177,11 +179,9 @@ const parseParams = () => {
     const versionSpec = currentBranch();
     return Object.assign(Object.assign({}, baseSandboxParams), { name,
         template,
-        workspaces, containers: containerSnapshots, dependencies: dependencySnapshots, envs,
-        autoLaunch,
-        repo,
+        workspaces, containers: containerSnapshots, dependencies: dependencySnapshots, envs, autoLaunch: !manualLaunch, repo,
         mode,
-        versionSpec, message: message || 'Crafting Sandbox [Preview]($URL)' });
+        versionSpec, message: message || 'Crafting Sandbox [Preview]($URL){:target="_blank"}' });
 };
 exports.parseParams = parseParams;
 const parseEnvironmentVariables = (params) => {

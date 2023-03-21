@@ -2,4 +2,3 @@
   uses: crafting-dev/sandbox-launch-action/@VERSION
   with:
     template: template-name
-    autoLaunch: true

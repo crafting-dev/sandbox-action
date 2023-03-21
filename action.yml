@@ -15,10 +15,9 @@ inputs:
   name:
     required: false
     description: 'name of the auto launch sandbox. If not specified, a default name like <REPO>-pr-<PR-NUMBER> would be used.'
-  autoLaunch:
+  manualLaunch:
     required: false
-    description: If true, sandbox is auto launched. Default to false.
-    default: true
+    description: If true, the sandbox would not be launched automatically. Default to false, which means the sandbox is automatically launched.
   mode:
     required: false
     description: Whether to follow the PR branch and automatically update the workspace(s).

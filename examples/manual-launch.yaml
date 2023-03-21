@@ -2,5 +2,4 @@
   uses: crafting-dev/sandbox-launch-action/@VERSION
   with:
     template: template-name
-    # $URL will be replaced by the auto launch URL.
-    message: Preview your PR in [Crafting Sandbox]($URL)
+    manual: true
