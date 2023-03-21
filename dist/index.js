@@ -181,7 +181,7 @@ const parseParams = () => {
         template,
         workspaces, containers: containerSnapshots, dependencies: dependencySnapshots, envs, autoLaunch: !manual, repo,
         mode,
-        versionSpec, message: message || 'Crafting Sandbox [Preview]($URL){:target="_blank"}' });
+        versionSpec, message: message || 'Crafting Sandbox [Preview]($URL)' });
 };
 exports.parseParams = parseParams;
 const parseEnvironmentVariables = (params) => {
