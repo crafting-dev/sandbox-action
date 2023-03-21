@@ -23,7 +23,7 @@ export const parseParams = (): SandboxParams => {
   const template = core.getInput('template', {
     required: true
   })
-  const manualLaunch = core.getBooleanInput('manualLaunch')
+  const manual = core.getBooleanInput('manual')
   const workspaces = parseCheckouts(core.getInput('checkouts'))
   const containerSnapshots = parseSnapshots(core.getInput('containerSnapshots'))
   const dependencySnapshots = parseSnapshots(core.getInput('depSnapshots'))
@@ -42,7 +42,7 @@ export const parseParams = (): SandboxParams => {
     containers: containerSnapshots,
     dependencies: dependencySnapshots,
     envs,
-    autoLaunch: !manualLaunch,
+    autoLaunch: !manual,
     repo,
     mode,
     versionSpec,
