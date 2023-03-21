@@ -18,6 +18,7 @@ inputs:
   manual:
     required: false
     description: If true, the sandbox would not be launched automatically. Default to false, which means the sandbox is automatically launched.
+    default: false
   mode:
     required: false
     description: Whether to follow the PR branch and automatically update the workspace(s).
